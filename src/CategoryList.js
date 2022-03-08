@@ -26,7 +26,7 @@ import { ListGroup, ListGroupItem } from "reactstrap";
             <ListGroupItem onClick={() => this.props.changeCategory(category)} key={category.id}>{category.categoryName}</ListGroupItem>
           ))}
         </ListGroup>
-        <h3>{this.props.currentCategory}</h3>
+        {/* <h3>{this.props.currentCategory.categoryName}</h3> */}
       </div>
     );
   }
