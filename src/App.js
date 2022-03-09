@@ -6,7 +6,7 @@ import ProductList from "./ProductList";
 
 export default class App extends Component {
   state = {
-    currentCategory: "", products:[]
+    currentCategory: "", products:[], cart:[]
   };  
 
   changeCategory = (category) => {
@@ -19,10 +19,20 @@ export default class App extends Component {
     if(seoUrl){
       url += "?categoryId=" + seoUrl;
     }
-
     fetch(url)
     .then(response => response.json())
     .then(data => this.setState({products: data}));
+  }
+
+  addToCart = (product) => {
+    let newCart = this.state.cart;
+    var addedItem = newCart.find(c => c.product.id===product.id);
+    if(addedItem){
+      addedItem.quantity += 1;
+    }else{
+      newCart.push({product:product, quantity:1});
+    }
+    this.setState({cart:newCart});
   }
   
   componentDidMount(){
@@ -35,13 +45,13 @@ export default class App extends Component {
     return (
       <div>
         <Container>
-            <Navi />
+            <Navi cart={this.state.cart} />
           <Row>
             <Col xs="3">
               <CategoryList currentCategory={this.state.currentCategory} changeCategory={this.changeCategory} info={categoryInfo} />
             </Col>
             <Col xs="9">
-              <ProductList products={this.state.products} currentCategory={this.state.currentCategory} info={productInfo}  />
+              <ProductList products={this.state.products} addToCart={this.addToCart} currentCategory={this.state.currentCategory} info={productInfo}  />
             </Col>
           </Row>
         </Container>
