@@ -35,9 +35,7 @@ export default class App extends Component {
     return (
       <div>
         <Container>
-          <Row>
             <Navi />
-          </Row>
           <Row>
             <Col xs="3">
               <CategoryList currentCategory={this.state.currentCategory} changeCategory={this.changeCategory} info={categoryInfo} />
