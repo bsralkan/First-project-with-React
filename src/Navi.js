@@ -7,7 +7,6 @@ import {
   Nav,
   Navbar,
   NavbarBrand,
-  NavbarText,
   NavbarToggler,
   NavItem,
   NavLink,
