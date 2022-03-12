@@ -45,6 +45,7 @@ export default class App extends Component {
   removeFromCart = (product) => {
     let newCart = this.state.cart.filter((c) => c.product.id !== product.id);
     this.setState({ cart: newCart });
+    alertify.error(product.productName + " product remove from cart!", 2);
   };
 
   componentDidMount() {
@@ -79,7 +80,12 @@ export default class App extends Component {
                     />
                   }
                 ></Route>
-                <Route exact path="/cart" element={<CartList></CartList>}></Route>
+                <Route path="/cart" element={
+                    <CartList
+                      cart={this.state.cart}
+                      removeFromCart={this.removeFromCart}
+                    />
+                  }></Route>
                 <Route element={<NotFound></NotFound>}></Route>
               </Routes>
             </Col>
